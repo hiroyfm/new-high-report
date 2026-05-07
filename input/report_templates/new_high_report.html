@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ report_date }} の新高値更新銘柄レポート</title>
+
+  <style>
+    body {
+      font-family: "Noto Sans JP", sans-serif;
+      color: #222;
+      margin: 40px;
+      line-height: 1.6;
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 26px;
+      border-bottom: 3px solid #333;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    .report-date {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .stock-card {
+      page-break-inside: avoid;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .stock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+    }
+
+    .stock-name {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .stock-code {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .metric-box {
+      background: #f7f7f7;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .positive {
+      color: #d93025;
+    }
+
+    .chart {
+      margin-top: 16px;
+    }
+
+    .chart img {
+      width: 100%;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+
+    .comment {
+      margin-top: 16px;
+      padding: 12px;
+      background: #fff8e1;
+      border-left: 4px solid #f6c343;
+      font-size: 14px;
+    }
+
+    .summary-section {
+    margin-bottom: 32px;
+    page-break-inside: avoid;
+    }
+
+    .summary-section h2 {
+    font-size: 20px;
+    border-left: 5px solid #333;
+    padding-left: 10px;
+    margin-bottom: 12px;
+    }
+
+    .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    }
+
+    .summary-table th {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    }
+
+    .summary-table td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    vertical-align: middle;
+    }
+
+    .summary-table .number {
+    text-align: right;
+    white-space: nowrap;
+    }
+
+    .positive {
+    color: #d93025;
+    font-weight: bold;
+    }
+
+    .negative {
+    color: #1a73e8;
+    font-weight: bold;
+    }
+    
+    .report-title-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    }
+
+    .report-title-block h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+    font-size: 20px;
+    border-left: 5px solid #333;
+    padding-left: 10px;
+    margin-bottom: 12px;
+    }
+
+    .summary-section {
+    break-before: avoid;
+    page-break-before: avoid;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="report-title-block">
+        <h1>{{ report_date }} の新高値更新銘柄レポート</h1>
+
+        <div class="report-date">
+            作成日: {{ report_date }}
+        </div>
+
+        <h2>サマリ</h2>
+    </div>
+
+<div class="summary-section">
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>銘柄名（銘柄コード）</th>
+                <th>市場名</th>
+                <th>セクター</th>
+                <th>終値</th>
+                <th>前日比</th>
+                <th>前週比</th>
+                <th>前月比</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock.CoName }}（{{ stock.Code[:4] }}）</td>
+                    <td>{{ stock.MktNm }}</td>
+                    <td>{{ stock.S17Nm }}</td>
+                    <td class="number">{{ "{:,.0f}".format(stock.AdjC) }}円</td>
+                    <td class="number {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
+                    {{ "%+.2f"|format(stock.Growth_rate_1day) }}%
+                    </td>
+                    <td class="number {% if stock.Growth_rate_1week >= 0 %}positive{% else %}negative{% endif %}">
+                    {{ "%+.2f"|format(stock.Growth_rate_1week) }}%
+                    </td>
+                    <td class="number {% if stock.Growth_rate_1month >= 0 %}positive{% else %}negative{% endif %}">
+                    {{ "%+.2f"|format(stock.Growth_rate_1month) }}%
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>各銘柄の詳細</h2>
+</div>
+
+  {% for stock in stocks %}
+  <section class="stock-card">
+    <div class="stock-header">
+      <div>
+        <div class="stock-name">【{{ stock.CoName }}（{{ stock.Code[:4] }}）】</div>
+        <div class="market-name">{{ stock.MktNm }}市場 / {{ stock.S17Nm }}</div>
+      </div>
+    </div>
+
+    <div class="metrics">
+        <div class="metric-value">{{ report_date }} 終値： {{ stock.AdjC }} 円</div>
+        <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
+          前日比：{{ "%+.2f"|format(stock.Growth_rate_1day) }}%、
+          前週比：{{ "%+.2f"|format(stock.Growth_rate_1week) }}%、
+          前月比：{{ "%+.2f"|format(stock.Growth_rate_1month) }}%
+        </div>
+      </div>
+
+    <div class="chart">
+      <img src="../charts/{{ stock.Code }}.png" alt="{{ stock.CoName }} の52週株価チャート">
+    </div>
+  </section>
+  {% endfor %}
+
+</body>
+</html>

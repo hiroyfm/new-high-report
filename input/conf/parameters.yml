@@ -1,0 +1,26 @@
+jquants:
+  base_url: "https://api.jquants.com"
+  paths:
+    equities_master: "/v2/equities/master"
+    daily_bars: "/v2/equities/bars/daily"
+    fins_summary: "/v2/fins/summary"
+    earnings_calender: "/v2/equities/earnings-calendar"
+    markets_calender: "/v2/markets/calendar"
+    investors_type: "/v2/equities/investor-types"
+    daily_topix: "/v2/indices/bars/daily/topix"
+LINE:
+  base_url: "https://api.line.me"
+  paths:
+    broadcast: "/v2/bot/message/broadcast"
+# edinet:
+#   base_url: "https://disclosure.edinet-fsa.go.jp/api"
+#   paths:
+#     docs_list: "/v2/documents.json"
+#     docs_path: "/v2/documents/{docID}?type=5&Subscription-Key={EDINET_API_KEY}"
+cloudflare:
+  r2:
+    public_dev_url: "https://pub-{public_dev_id}.r2.dev"
+    backet_name: "stock-analysis"
+    paths:
+      new_high_report: "new_high_report"
+
