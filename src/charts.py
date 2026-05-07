@@ -13,7 +13,7 @@ def save_price_chart(df, output_path):
     plt.savefig(output_path, dpi=150)
     plt.close()
 
-def plot_charts(daily_stock_df, new_highs_list, charts_output_dir):
+def plot_charts(daily_stock_df, new_highs_list, CHARTS_DIR):
     
     # 出来高0の日は四本値が欠損しているため、スキップして可視化
     daily_stock_df = daily_stock_df.dropna(subset=["AdjC"])
@@ -29,7 +29,7 @@ def plot_charts(daily_stock_df, new_highs_list, charts_output_dir):
     Parallel(n_jobs=-1)(
         delayed(save_price_chart)(
             df,
-            f"{charts_output_dir}/{code}.png"
+            f"{CHARTS_DIR}/{code}.png"
         )
         for code, df in groups
     )

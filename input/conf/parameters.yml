@@ -23,4 +23,5 @@ cloudflare:
     backet_name: "stock-analysis"
     paths:
       new_high_report: "new_high_report"
+      preprocessed_table: "preprocessed_table"
 

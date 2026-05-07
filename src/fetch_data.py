@@ -124,9 +124,6 @@ def fetch_jquants_data(
     equities_master = fetch_equities_master(JQUANTS_API_KEY, jquants_base_url, Path_equities_master, newest_market_date)
     
     # 直近営業日を基準とした直近1年の全銘柄の日別株価データを取得
-    # daily_stock_df = fetch_daily_stock_data(JQUANTS_API_KEY, jquants_base_url, Path_daily_bars, market_date_last_365days)
-    
-    daily_stock_df = pd.read_parquet(f"./output/tmp/daily_stock_data_365days_2026-05-01.parquet")
-
-    
+    daily_stock_df = fetch_daily_stock_data(JQUANTS_API_KEY, jquants_base_url, Path_daily_bars, market_date_last_365days)
+      
     return newest_market_date, market_date_last_365days, equities_master, daily_stock_df

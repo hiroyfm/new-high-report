@@ -2,6 +2,8 @@ import pandas as pd
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
+from src.utils import upload_file_to_cloudflare
+
 def extract_new_highs(newest_market_date, equities_master, daily_stock_df):
     ### 直近営業日で52週高値を更新した銘柄を抽出
     daily_stock_df["Date"] = pd.to_datetime(daily_stock_df["Date"], format="%Y-%m-%d").dt.date
@@ -58,7 +60,20 @@ def calculate_growth_rate(new_highs_df, daily_stock_df_1day_ago, daily_stock_df_
     
     return new_highs_df
 
-def preprocessing_data(newest_market_date, market_date_last_365days, equities_master, daily_stock_df):
+def preprocessing_data(
+    newest_market_date, 
+    market_date_last_365days, 
+    equities_master, 
+    daily_stock_df,
+    INTERMEDIATE_DIR,
+    BATCH_ID,
+    r2_preprocessed_table_folder_name,
+    CLOUDFLARE_ACCOUNT_ID,
+    R2_ACCESS_KEY_ID,
+    R2_SECRET_ACCESS_KEY,
+    r2_public_dev_url,
+    r2_bucket_name,
+):
     
     # 直近の営業日で​52週高値を​更新した​銘柄を​抽出
     new_highs_df = extract_new_highs(newest_market_date, equities_master, daily_stock_df)
@@ -86,6 +101,25 @@ def preprocessing_data(newest_market_date, market_date_last_365days, equities_ma
 
     # 新高値更新銘柄リストも作成
     new_highs_list = list(new_highs_df["Code"].unique())
+    
+    # 加工済みデータを中間テーブルとしてParquetで保存
+    Path_new_highs_df = INTERMEDIATE_DIR / f"new_highs_df_{newest_market_date}.parquet"
+    new_highs_df.to_parquet(Path_new_highs_df)
+    
+    # 加工済みのParquetをCloudflareにアップロード
+    content_type="application/octet-stream"  
+    
+    _ = upload_file_to_cloudflare(
+        Path_new_highs_df,
+        content_type,
+        BATCH_ID,
+        r2_preprocessed_table_folder_name,
+        CLOUDFLARE_ACCOUNT_ID,
+        R2_ACCESS_KEY_ID,
+        R2_SECRET_ACCESS_KEY,
+        r2_public_dev_url,
+        r2_bucket_name,
+    )
  
     return new_highs_df, new_highs_list
     

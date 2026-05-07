@@ -11,3 +11,12 @@ wheels/
 
 # Credentials
 input/conf/credentials.yml
+
+# Work
+work/
+
+# intermediate
+intermediate/
+
+# Output
+output/
