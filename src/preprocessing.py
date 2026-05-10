@@ -35,11 +35,11 @@ def extract_new_highs(newest_market_date, equities_master, daily_stock_df):
 
 def get_previous_date(newest_market_date, market_date_last_365days):
     ### 直近営業日から1日前、1週間前、1か月前の営業日を取得。該当日が休業日の場合は、該当日より前の最新営業日を取得
-    date_1_matket_day_ago = max([date for date in market_date_last_365days if date <= newest_market_date - timedelta(days=1)])
-    date_1_matket_week_ago = max([date for date in market_date_last_365days if date <= newest_market_date - timedelta(weeks=1)])
-    date_1_matket_month_ago = max([date for date in market_date_last_365days if date <= newest_market_date - relativedelta(months=1)])
+    date_1_market_day_ago = max([date for date in market_date_last_365days if date <= newest_market_date - timedelta(days=1)])
+    date_1_market_week_ago = max([date for date in market_date_last_365days if date <= newest_market_date - timedelta(weeks=1)])
+    date_1_market_month_ago = max([date for date in market_date_last_365days if date <= newest_market_date - relativedelta(months=1)])
 
-    return date_1_matket_day_ago, date_1_matket_week_ago, date_1_matket_month_ago
+    return date_1_market_day_ago, date_1_market_week_ago, date_1_market_month_ago
 
 def filter_date_stock_data(daily_stock_df, date, period):
     return (

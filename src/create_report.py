@@ -58,7 +58,7 @@ def create_and_upload_report(
     R2_ACCESS_KEY_ID,
     R2_SECRET_ACCESS_KEY,
     r2_public_dev_url,
-    r2_backet_name,
+    r2_bucket_name,
     r2_report_folder_name
 ):
     # HTML形式のレポートを作成
@@ -85,7 +85,7 @@ def create_and_upload_report(
         R2_ACCESS_KEY_ID,
         R2_SECRET_ACCESS_KEY,
         r2_public_dev_url,
-        r2_backet_name,
+        r2_bucket_name,
     )
     
     return report_url
