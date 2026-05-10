@@ -51,11 +51,11 @@ def main():
     jquants_base_url = params["jquants"]["base_url"]
     Path_equities_master = params["jquants"]["paths"]["equities_master"]
     Path_daily_bars = params["jquants"]["paths"]["daily_bars"]
-    Path_fins_summary = params["jquants"]["paths"]["fins_summary"]
-    Path_earnings_calender = params["jquants"]["paths"]["earnings_calender"]
+    # Path_fins_summary = params["jquants"]["paths"]["fins_summary"]
+    # Path_earnings_calender = params["jquants"]["paths"]["earnings_calender"]
     Path_markets_calender = params["jquants"]["paths"]["markets_calender"]
-    Path_investors_type = params["jquants"]["paths"]["investors_type"]
-    Path_daily_topix = params["jquants"]["paths"]["daily_topix"]
+    # Path_investors_type = params["jquants"]["paths"]["investors_type"]
+    # Path_daily_topix = params["jquants"]["paths"]["daily_topix"]
 
     print(jquants_base_url)
 

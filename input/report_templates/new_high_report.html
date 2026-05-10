@@ -225,13 +225,19 @@
     </div>
 
     <div class="metrics">
-        <div class="metric-value">{{ report_date }} 終値： {{ stock.AdjC }} 円</div>
-        <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
-          前日比：{{ "%+.2f"|format(stock.Growth_rate_1day) }}%、
-          前週比：{{ "%+.2f"|format(stock.Growth_rate_1week) }}%、
-          前月比：{{ "%+.2f"|format(stock.Growth_rate_1month) }}%
-        </div>
+      前日比：
+      <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
+      {{ "%+.2f"|format(stock.Growth_rate_1day) }}%
       </div>
+      、前週比：
+      <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
+      {{ "%+.2f"|format(stock.Growth_rate_1week) }}%
+      </div>
+      、前月比：
+      <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
+      {{ "%+.2f"|format(stock.Growth_rate_1month) }}%
+      </div>
+    </div>
 
     <div class="chart">
       <img src="../charts/{{ stock.Code }}.png" alt="{{ stock.CoName }} の52週株価チャート">

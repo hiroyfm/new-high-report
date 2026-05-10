@@ -3,11 +3,11 @@ jquants:
   paths:
     equities_master: "/v2/equities/master"
     daily_bars: "/v2/equities/bars/daily"
-    fins_summary: "/v2/fins/summary"
-    earnings_calender: "/v2/equities/earnings-calendar"
+    # fins_summary: "/v2/fins/summary"
+    # earnings_calender: "/v2/equities/earnings-calendar"
     markets_calender: "/v2/markets/calendar"
-    investors_type: "/v2/equities/investor-types"
-    daily_topix: "/v2/indices/bars/daily/topix"
+    # investors_type: "/v2/equities/investor-types"
+    # daily_topix: "/v2/indices/bars/daily/topix"
 LINE:
   base_url: "https://api.line.me"
   paths:
