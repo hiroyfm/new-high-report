@@ -76,7 +76,9 @@ flowchart TD
     B --> C[データ加工<br/>src/preprocessing.py]
     C --> D[チャート作成<br/>src/charts.py]
     D --> E[レポート作成<br/>src/create_report.py]
+    C --> E   
     E --> F[LINE通知<br/>src/notify_LINE.py]
+    G[レポートテンプレート<br/>input/report_templates/new_high_report.html] --> E
 
     C --> R2[データ保存<br/>Cloudflare R2]
     E <--> R2
