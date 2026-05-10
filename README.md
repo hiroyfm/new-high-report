@@ -69,17 +69,17 @@
 
 ```mermaid
 flowchart TD
-    A[パラメータ設定<br/>parameters.yml<br/>credentials.yml] --> B[データ取得]
+    A[パラメータ設定<br/>input/conf/parameters.yml<br/>input/conf/credentials.yml] --> B[データ取得<br/>src/fetch_data.py]
 
     B <--> JQ[J-Quants API]
 
-    B --> C[データ加工]
-    C --> D[チャート作成]
-    D --> E[レポート作成]
-    E --> F[LINE通知]
+    B --> C[データ加工<br/>src/preprocessing.py]
+    C --> D[チャート作成<br/>src/charts.py]
+    D --> E[レポート作成<br/>src/create_report.py]
+    E --> F[LINE通知<br/>src/notify_LINE.py]
 
     C --> R2[データ保存<br/>Cloudflare R2]
-    E --> R2
+    E <--> R2
 ```
 
 ## ディレクトリ構成
