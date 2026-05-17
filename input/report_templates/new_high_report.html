@@ -75,6 +75,7 @@
       font-size: 20px;
       font-weight: bold;
       margin-top: 4px;
+      display: inline-block;
     }
 
     .positive {
@@ -226,17 +227,17 @@
 
     <div class="metrics">
       前日比：
-      <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
-      {{ "%+.2f"|format(stock.Growth_rate_1day) }}%
-      </div>
+      <span class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
+        {{ "%+.2f"|format(stock.Growth_rate_1day) }}%
+      </span>
       、前週比：
-      <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
-      {{ "%+.2f"|format(stock.Growth_rate_1week) }}%
-      </div>
+      <span class="metric-value {% if stock.Growth_rate_1week >= 0 %}positive{% else %}negative{% endif %}">
+        {{ "%+.2f"|format(stock.Growth_rate_1week) }}%
+      </span>
       、前月比：
-      <div class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
-      {{ "%+.2f"|format(stock.Growth_rate_1month) }}%
-      </div>
+      <span class="metric-value {% if stock.Growth_rate_1month >= 0 %}positive{% else %}negative{% endif %}">
+        {{ "%+.2f"|format(stock.Growth_rate_1month) }}%
+      </span>
     </div>
 
     <div class="chart">
