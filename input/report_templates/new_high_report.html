@@ -165,6 +165,17 @@
     break-before: avoid;
     page-break-before: avoid;
     }
+    .growth-metrics {
+      margin-bottom: 18px;
+      white-space: nowrap;
+    }
+
+    .growth-metrics .metric-value {
+      display: inline;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 0;
+    }
   </style>
 </head>
 
@@ -225,7 +236,7 @@
       </div>
     </div>
 
-    <div class="metrics">
+    <div class="growth-metrics">
       前日比：
       <span class="metric-value {% if stock.Growth_rate_1day >= 0 %}positive{% else %}negative{% endif %}">
         {{ "%+.2f"|format(stock.Growth_rate_1day) }}%
